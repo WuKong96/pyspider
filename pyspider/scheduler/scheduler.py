@@ -81,12 +81,12 @@ class Project(object):
             fail_cnt = 0
             for _, task in self.active_tasks:
                 if task is self._unpause_last_seen:
-                    cnt = max(cnt, self.scheduler.UNPAUSE_CHECK_NUM)
                     break
+                cnt += 1
                 # ignore select task
                 if task.get('type') == self.scheduler.TASK_PACK:
                     continue
-                cnt += 1
+
                 if task['track']['process']['ok']:
                     # break with enough check cnt
                     cnt = max(cnt, self.scheduler.UNPAUSE_CHECK_NUM)
