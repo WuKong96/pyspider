@@ -860,6 +860,21 @@ class TestProject(unittest.TestCase):
         self.assertFalse(self.project.paused)
         self.assertFalse(self.project._paused)
 
+    def test_pause_80_paused_again(self):
+        for i in range(self.scheduler.FAIL_PAUSE_NUM):
+            self.project.active_tasks.appendleft((time.time(), dict(self.status_fail_pack)))
+        self.assertTrue(self.project.paused)
+
+    def test_pause_90_unpause_checking(self):
+        time.sleep(3)
+        self.assertFalse(self.project.paused)
+
+    def test_pause_99_unpaused(self):
+        for i in range(1):
+            self.project.active_tasks.appendleft((time.time(), dict(self.status_ok_pack)))
+        self.assertFalse(self.project.paused)
+        self.assertFalse(self.project._paused)
+
     def test_pause_x_disable_auto_pause(self):
         fail_pause_num = self.scheduler.FAIL_PAUSE_NUM
         self.scheduler.FAIL_PAUSE_NUM = 0
