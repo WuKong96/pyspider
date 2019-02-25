@@ -11,7 +11,6 @@ import shutil
 import time
 
 import unittest2 as unittest
-from pyspider.database.base.taskdb import TaskDB
 
 logging.config.fileConfig("pyspider/logging.conf")
 
